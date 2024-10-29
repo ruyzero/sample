@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+.container {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+table {
+  width: 100%;
+  margin-top: 20px;
+}
+th, td {
+  text-align: center;
+  padding: 3px;
+  font-size: 15px;
+}
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #e7ffff8f;
+}
+
+.button-container a {
+  padding-left: 10px; 
+}
+  
+  .labelforsearch {
+    cursor: text;
+    padding: 0px 12px;
+  }
+  
+  .border {
+    height: 40%;
+    width: 1.3px;
+    background-color: rgb(223, 223, 223);
+  }
+
+  
+  td:last-child {text-align:center;}
+  h1 {
+      font-family: sans-serif;
+  }
+
+  #example {
+    border-color: rgb(75, 82, 88);
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  button {
+    border: none;
+    display: flex;
+    padding: 0.75rem 1.5rem;
+    background-color: #488aec;
+    color: #ffffff;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    font-weight: 700;
+    text-align: center;
+    cursor: pointer;
+    text-transform: uppercase;
+    vertical-align: middle;
+    align-items: center;
+    border-radius: 0.5rem;
+    user-select: none;
+    gap: 0.75rem;
+    box-shadow:
+      0 4px 6px -1px #488aec31,
+      0 2px 4px -1px #488aec17;
+    transition: all 0.6s ease;
+  }
+  
+  button:hover {
+    box-shadow:
+      0 10px 15px -3px #488aec4f,
+      0 4px 6px -2px #488aec17;
+  }
+  
+  button:focus,
+  button:active {
+    opacity: 0.85;
+    box-shadow: none;
+  }
+  
+  button svg {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  .scrollable-table {
+    overflow-y: auto;
+    max-height: 40; 
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+    margin-top: 20px;
+}
+
+  

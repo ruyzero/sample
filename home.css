@@ -1,0 +1,48 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* card style*/
+
+.card.custom-card {
+  background-color: #e0f7ff !important; 
+  transition: transform 0.3s, box-shadow 0.3s !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important; 
+}
+
+.card.custom-card:hover {
+  transform: scale(1.05) !important; 
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2) !important;
+}
+
+.card-body h5 {
+  color: #007BFF !important;
+  margin-top: 10px;
+  height: 500px;
+}
+
+.card-body .data {
+  font-size: 20px !important;
+  font-weight: bold !important;
+  text-align: center; 
+}
+
+
+#example {
+  border-color: rgb(75, 82, 88);
+  margin-top: 20px;
+  text-align: center;
+}
+
+
+.scrollable-table {
+  overflow-y: auto;
+  max-height: 40; 
+  border: 1px solid #ccc; 
+  border-radius: 5px; 
+  margin-top: 20px;
+}
+
+
+
+
+
