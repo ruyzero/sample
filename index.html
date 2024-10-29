@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Family Feud Game</title>
+    <!-- Tailwind CSS (CDN) -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Alpine.js for simple reactivity -->
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+</head>
+<body class="bg-gray-800 text-white flex items-center justify-center min-h-screen">
+
+<div x-data="familyFeudGame()" x-init="init()" class="text-center w-full max-w-md bg-gray-900 rounded-lg shadow-lg p-5">
+    <!-- Game Header -->
+    <h1 class="text-3xl font-bold mb-6">Family Feud</h1>
+    <h2 x-show="gameOver" class="text-2xl mb-4">Game Over! Final Score: <span x-text="score"></span></h2>
+
+    <!-- Question and Timer -->
+    <template x-if="!gameOver">
+        <div>
+            <h2 x-text="'Question ' + (questionIndex + 1) + ' of ' + questions.length" class="text-xl mb-2"></h2>
+            <p x-text="currentQuestion.question" class="text-lg mb-6 font-semibold"></p>
+            <div class="mb-4">
+                <p>Time left: <span x-text="timeLeft" class="font-bold text-red-500"></span>s</p>
+            </div>
+        </div>
+    </template>
+
+    <!-- Answer Options -->
+    <template x-if="!gameOver">
+        <div class="grid gap-4">
+            <template x-for="(answer, index) in currentQuestion.answers" :key="index">
+                <button 
+                    x-text="answer.answer"
+                    @click="submitAnswer(index)"
+                    class="py-2 px-4 rounded bg-gray-700 hover:bg-gray-600 transition">
+                </button>
+            </template>
+        </div>
+    </template>
+
+    <!-- Next Question or Restart Button -->
+    <button 
+        x-show="gameOver"
+        @click="restartGame"
+        class="mt-6 py-2 px-4 rounded bg-blue-600 hover:bg-blue-500 transition">Restart Game</button>
+</div>
+
+<script>
+// Family Feud Game Data and Logic
+function familyFeudGame() {
+    return {
+        questions: [
+            { question: "Name a common house pet", answers: [{answer: "Dog", points: 30}, {answer: "Cat", points: 20}, {answer: "Fish", points: 10}] },
+            { question: "Name a color in a rainbow", answers: [{answer: "Red", points: 25}, {answer: "Blue", points: 15}, {answer: "Yellow", points: 10}] },
+            { question: "Name a holiday associated with fireworks", answers: [{answer: "4th of July", points: 30}, {answer: "New Year's", points: 20}, {answer: "Diwali", points: 10}] },
+            { question: "Name something you find in a school", answers: [{answer: "Desk", points: 20}, {answer: "Books", points: 15}, {answer: "Teachers", points: 10}] },
+            { question: "Name something you drink in the morning", answers: [{answer: "Coffee", points: 30}, {answer: "Tea", points: 20}, {answer: "Juice", points: 10}] },
+            { question: "Name something found in a garage", answers: [{answer: "Car", points: 25}, {answer: "Tools", points: 15}, {answer: "Bicycle", points: 10}] },
+            { question: "Name something associated with Christmas", answers: [{answer: "Tree", points: 30}, {answer: "Santa", points: 20}, {answer: "Gifts", points: 10}] },
+            { question: "Name a popular pizza topping", answers: [{answer: "Pepperoni", points: 30}, {answer: "Cheese", points: 20}, {answer: "Mushrooms", points: 10}] },
+            { question: "Name something you find on a beach", answers: [{answer: "Sand", points: 30}, {answer: "Shells", points: 15}, {answer: "Water", points: 10}] },
+            { question: "Name something you use to write", answers: [{answer: "Pen", points: 25}, {answer: "Pencil", points: 15}, {answer: "Marker", points: 10}] }
+        ],
+        score: 0,
+        questionIndex: 0,
+        timeLeft: 15,
+        timer: null,
+        gameOver: false,
+
+        get currentQuestion() {
+            return this.questions[this.questionIndex];
+        },
+
+        startTimer() {
+            this.timeLeft = 15;
+            clearInterval(this.timer);
+            this.timer = setInterval(() => {
+                if (this.timeLeft > 0) {
+                    this.timeLeft--;
+                } else {
+                    this.nextQuestion();
+                }
+            }, 1000);
+        },
+
+        submitAnswer(index) {
+            // Increase score based on selected answer's points
+            this.score += this.currentQuestion.answers[index].points;
+            this.nextQuestion();
+        },
+
+        nextQuestion() {
+            clearInterval(this.timer); // Clear timer for current question
+
+            // Check if there are more questions
+            if (this.questionIndex < this.questions.length - 1) {
+                this.questionIndex++;
+                this.startTimer(); // Start timer for next question
+            } else {
+                this.endGame();
+            }
+        },
+
+        endGame() {
+            this.gameOver = true;
+            clearInterval(this.timer);
+        },
+
+        restartGame() {
+            this.score = 0;
+            this.questionIndex = 0;
+            this.gameOver = false;
+            this.startTimer(); // Start timer for new game
+        },
+
+        init() {
+            this.startTimer(); // Start timer when game initializes
+        }
+    };
+}
+</script>
+</body>
+</html>
